@@ -35,7 +35,42 @@ strings.Contains("aa", "a")
 strings.ReplaceAll("abcb", "b", "c")
 ```
 
+### Encode to utf-8???
+
+No need.
+
+* Ref: [Stackoverflow: Equivalent of python's encode('utf8') in golang](https://stackoverflow.com/questions/42541297/equivalent-of-pythons-encodeutf8-in-golang)
+
 ## Package
+
+### threading
+
+* `threading.Lock`: Golang's sync.Mutex only provides **Lock** and **Unlock** operation.
+    * No **TryLock**?
+        * [This issue](https://github.com/golang/go/issues/6123) has been discussed in 2013, and golang seems not to implement this function.
+        * [github.com/LK4D4/trylock](https://github.com/LK4D4/trylock)
+        * Or implement by channel:
+```go
+// A Lock
+ch := make(chan bool, 1)
+
+// Lock
+ch <- true
+
+// Trylock?
+select {
+case ch <- true:
+    // Trylock successfully
+default:
+    // Fail to lock 
+}
+
+// Islock?
+len(ch) == 1
+
+// Unlock
+<-ch
+```
 
 ### string
 
@@ -98,3 +133,30 @@ url.QueryEscape(s)
                 * `post`: `80`
                 * **Notice that `net.SplitHostPort("www.kimo.com")` return err and empty host and empty port**
         * `u.RawQuery`: `a=1`
+
+### os
+
+* `os.path.join(a, b, c)`
+
+```go
+path.Join(a, b, c)
+```
+
+### base64
+
+* `base64.urlsafe_b64encode(s)`
+
+Example: base64.urlsafe_b64encode("a") = "YQ=="
+
+```go
+base64.RawURLEncoding.EncodeToString([]byte("a"))
+```
+
+EncodeToString("a") return "YQ" which has no "=" padding.
+
+### pytricia
+
+Support ipv4, ipv6
+
+* [github.com/yl2chen/cidranger](https://github.com/yl2chen/cidranger)
+* Check/Get operation need about 100ns~300ns (DB records $\approx$ 1200)
