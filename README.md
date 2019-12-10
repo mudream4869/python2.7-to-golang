@@ -35,6 +35,22 @@ strings.Contains("aa", "a")
 strings.ReplaceAll("abcb", "b", "c")
 ```
 
+* "1|2|3".split("|", 1)
+
+Notice that `1` means split the string by at **most 1 `|`**, however split function in golang use the number of **parts** as a parameter. 
+
+```go
+strings.SplitN("1|2|3", "|", 2)
+```
+
+### float(?)
+
+Python's float function tranforms many things to float. According to [this](https://stackoverflow.com/a/20929983/4411336), "infinity" can also be tranformed to float. 
+
+* [Stackoverflow: Converting unknown interface to float64 in Golang
+](https://stackoverflow.com/questions/20767724/converting-unknown-interface-to-float64-in-golang)
+
+
 ### Encode to utf-8???
 
 No need.
