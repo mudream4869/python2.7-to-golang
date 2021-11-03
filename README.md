@@ -160,6 +160,8 @@ path.Join(a, b, c)
 
 ### base64
 
+#### URL Encoding
+
 * `base64.urlsafe_b64encode(s)`
 
 Example: base64.urlsafe_b64encode("a") = "YQ=="
@@ -169,6 +171,21 @@ base64.RawURLEncoding.EncodeToString([]byte("a"))
 ```
 
 EncodeToString("a") return "YQ" which has no "=" padding.
+
+#### URL Decoding
+
+* `base64.urlsafe_b64decode(s)`
+
+Example: base64.urlsafe_b64decode("YQ==") = "a"
+Throw exception if no "=" padding
+
+
+```go
+base64.RawURLEncoding.DecodeToString([]byte("YQ"))
+```
+
+DecodeToString("YQ") return "a".
+DecodeToString("YQ==") return error: "=" is an illegal character.
 
 ### pytricia
 
