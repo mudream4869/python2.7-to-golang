@@ -88,6 +88,8 @@ len(ch) == 1
 <-ch
 ```
 
+* go 1.18: [Mutex.TryLock()](https://pkg.go.dev/sync#Mutex.TryLock)
+
 ### string
 
 * `string.Template("${a}${b}").safe_substitute({"a":1,"b":2})`
